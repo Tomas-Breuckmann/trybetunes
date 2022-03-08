@@ -17,6 +17,8 @@ class Album extends React.Component {
 
   componentDidMount() {
     const { match: { params: { id } } } = this.props;
+    // const { id } = this.props.match.params;
+    // console.log(this.props);
     this.geraListaMusicas(id);
   }
 
@@ -26,7 +28,7 @@ class Album extends React.Component {
         showResults: false },
       async () => {
         const resultado = await getMusics(id);
-        console.log(resultado);
+        // console.log(resultado);
         this.setState({
           loading: false,
           listaMusicas: resultado,
@@ -39,7 +41,7 @@ class Album extends React.Component {
   render() {
     const { loading, listaMusicas, showResults } = this.state;
     const lmr = listaMusicas.filter((music, index) => index >= 1);
-    console.log(lmr);
+    // console.log(lmr);
     return (
       <div data-testid="page-album">
         Album
@@ -75,12 +77,16 @@ class Album extends React.Component {
 }
 
 // solução para arrumar o propTypes corretamente foi proposta por Imar: https://github.com/tryber/sd-019-a-project-trybetunes/pull/1/files
+// Album.propTypes = {
+// match: PropTypes.shape({
+//   params: PropTypes.shape({
+//     id: PropTypes.string,
+//   }),
+// }).isRequired,
+// };
+
 Album.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }).isRequired,
-};
+  match: PropTypes.object,
+}.isRequired;
 
 export default Album;
