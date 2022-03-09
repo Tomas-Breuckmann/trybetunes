@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong, removeSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends React.Component {
@@ -12,26 +12,42 @@ class MusicCard extends React.Component {
     };
   }
 
+  async componentDidMount() {
+    this.setState(
+      { loading: true },
+      async () => {
+        const favoriteSongs = await getFavoriteSongs();
+        const { musica } = this.props;
+        const { trackId } = musica;
+        // console.log(trackId);
+        console.log(favoriteSongs.some((music) => music.trackId === trackId));
+        this.setState({
+          loading: false,
+          checked: favoriteSongs.some((music) => music.trackId === trackId) });
+      },
+    );
+  }
+
   handleChange = (event) => {
     const { musica } = this.props;
-    console.log(event.target.checked);
-    // const { checked } = this.state;
     this.setState({ checked: event.target.checked },
       () => this.favoritaMusica(musica));
   }
 
   favoritaMusica(musica) {
     const { checked } = this.state;
-    if (checked) {
-      this.setState(
-        { loading: true },
-        async () => {
+    this.setState(
+      { loading: true },
+      async () => {
+        if (checked) {
           await addSong(musica);
-          this.setState({
-            loading: false });
-        },
-      );
-    }
+        } else {
+          await removeSong(musica);
+        }
+        this.setState({
+          loading: false });
+      },
+    );
   }
 
   render() {
