@@ -62,25 +62,29 @@ class Search extends React.Component {
     return (
       <div data-testid="page-search">
         <Header />
-        <form onSubmit={ this.searchClick }>
-          <label htmlFor="searchArtist">
-            <input
-              name="searchArtist"
-              type="text"
-              data-testid="search-artist-input"
-              value={ searchArtist }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            name="search"
-            type="submit"
-            data-testid="search-artist-button"
-            disabled={ disable }
-          >
-            Entrar
-          </button>
-        </form>
+        <div className="form-container">
+          <form onSubmit={ this.searchClick }>
+            <label htmlFor="searchArtist">
+              <input
+                className="search-input"
+                name="searchArtist"
+                type="text"
+                data-testid="search-artist-input"
+                value={ searchArtist }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <button
+              // className="button is-primary"
+              name="search"
+              type="submit"
+              data-testid="search-artist-button"
+              disabled={ disable }
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
         {
           load && <Loading />
         }

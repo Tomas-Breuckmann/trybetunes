@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+// import { button } from 'antd';
 import Loading from '../components/Loading';
 import { createUser } from '../services/userAPI';
 

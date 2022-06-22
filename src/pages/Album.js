@@ -44,7 +44,6 @@ class Album extends React.Component {
     // console.log(lmr);
     return (
       <div data-testid="page-album">
-        Album
         <Header />
         {
           loading && <Loading />
