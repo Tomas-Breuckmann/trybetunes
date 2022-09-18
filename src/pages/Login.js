@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-// import { button } from 'antd';
 import Loading from '../components/Loading';
 import { createUser } from '../services/userAPI';
+import { LoginMain, LoginContent, Form } from './Styles/login.styles';
 
 class Login extends React.Component {
   constructor() {
@@ -53,34 +53,35 @@ class Login extends React.Component {
   render() {
     const { disable, name, load, redirect } = this.state;
     return (
-      <div data-testid="page-login">
-        <form onSubmit={ this.submitForm }>
-          <label htmlFor="name">
-            Nome:
-            <input
-              name="name"
-              type="text"
-              data-testid="login-name-input"
-              value={ name }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            name="submit"
-            type="submit"
-            data-testid="login-submit-button"
-            disabled={ disable }
-          >
-            Entrar
-          </button>
-        </form>
-        {
-          load && <Loading />
-        }
-        {
-          redirect && <Redirect to="/search" />
-        }
-      </div>
+      <LoginMain>
+        <LoginContent>
+          <Form onSubmit={ this.submitForm }>
+            <label htmlFor="name">
+              {/* Nome: */}
+              <input
+                name="name"
+                type="text"
+                value={ name }
+                placeholder="Name"
+                onChange={ this.handleChange }
+              />
+            </label>
+            <button
+              name="submit"
+              type="submit"
+              disabled={ disable }
+            >
+              Enter
+            </button>
+          </Form>
+          {
+            load && <Loading />
+          }
+          {
+            redirect && <Redirect to="/search" />
+          }
+        </LoginContent>
+      </LoginMain>
     );
   }
 }
