@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
-import '../css/header.css';
+import { HeaderMain, HeaderContent, StyledLink } from './Styles/header.styles';
+// import '../css/header.css';
 
 class Header extends React.Component {
   constructor() {
@@ -34,31 +34,33 @@ class Header extends React.Component {
   render() {
     const { load, usuario } = this.state;
     return (
-      <header className="header-container" data-testid="header-component">
-        <div className="header-links-container">
-          <Link className="link" to="/search" data-testid="link-to-search"> Search</Link>
-          <Link
-            className="link"
-            to="/favorites"
-            data-testid="link-to-favorites"
-          >
-            Favorites
-          </Link>
-          <Link
-            className="link"
-            to="/profile"
-            data-testid="link-to-profile"
-          >
-            Profile
-          </Link>
-        </div>
-        {
-          load && <Loading />
-        }
-        <div className="header-name">
-          <h2 data-testid="header-user-name">{ usuario.name }</h2>
-        </div>
-      </header>
+      <HeaderMain>
+        <HeaderContent>
+          <div>
+            <StyledLink className="link" to="/search"> Search</StyledLink>
+            {/* <Link
+              className="link"
+              to="/favorites"
+              data-testid="link-to-favorites"
+            >
+              Favorites
+            </Link>
+            <Link
+              className="link"
+              to="/profile"
+              data-testid="link-to-profile"
+            >
+              Profile
+            </Link> */}
+          </div>
+          <div className="header-name">
+            <h2 data-testid="header-user-name">{ usuario.name }</h2>
+          </div>
+          {
+            load && <Loading />
+          }
+        </HeaderContent>
+      </HeaderMain>
     );
   }
 }

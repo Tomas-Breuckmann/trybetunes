@@ -19,7 +19,7 @@ const Spinner = styled.span`
   border-radius: 50%;  
   box-sizing: border-box;
   display: inline-block;
-  /* position: absolute; */
+  position: absolute;
   /* left: 50%; */
   /* top: 0; */
   vertical-align: middle;

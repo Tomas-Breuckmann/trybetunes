@@ -14,4 +14,8 @@ export default {
     background: 'var(--g12)',
     color: 'var(--g3)',
   },
+  header: {
+    background: 'var(--g11)',
+    color: 'var(--g3)',
+  },
 };
