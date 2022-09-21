@@ -1,7 +1,9 @@
+const g12 = 'var(--g12)';
+
 export default {
   title: 'dark',
   general: {
-    background: 'var(--g12)',
+    background: g12,
     color: 'var(--g3)',
   },
   button: {
@@ -11,7 +13,7 @@ export default {
     border: 'var(--b8)',
   },
   login: {
-    background: 'var(--g12)',
+    background: g12,
     color: 'var(--g3)',
   },
   header: {
@@ -19,7 +21,7 @@ export default {
     color: 'var(--g3)',
   },
   search: {
-    background: 'var(--g12)',
+    background: g12,
     color: 'var(--g3)',
     cardBackground: 'var(--g11)',
     cardBorder: 'var(--g10)',
