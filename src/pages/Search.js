@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import Loading from '../components/Loading';
+// import Loading from '../components/Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-// import '../css/search.css';
+import { SearchMain, SearchContent, SearchContentResults,
+  LinkStyled } from './Styles/search.styles';
 
 class Search extends React.Component {
   constructor() {
@@ -11,8 +12,8 @@ class Search extends React.Component {
     this.state = {
       disable: true,
       searchArtist: '',
-      load: false,
-      artista: '',
+      // load: false,
+      // artista: '',
       searchResults: [],
       showResults: false,
     };
@@ -41,13 +42,13 @@ class Search extends React.Component {
   async searchResult() {
     const { searchArtist } = this.state;
     this.setState(
-      { load: true },
+      // { load: true },
       async () => {
         const resultado = await searchAlbumsAPI(searchArtist);
         // console.log(resultado);
         this.setState({
-          load: false,
-          artista: searchArtist,
+          // load: false,
+          // artista: searchArtist,
           searchResults: resultado,
           searchArtist: '',
           showResults: true,
@@ -57,67 +58,50 @@ class Search extends React.Component {
   }
 
   render() {
-    const { searchArtist, disable, load, searchResults, artista,
-      showResults } = this.state;
+    const { searchArtist, disable, searchResults, showResults } = this.state;
     return (
-      <div data-testid="page-search">
+      <>
         <Header />
-        <div className="form-container">
-          <form onSubmit={ this.searchClick }>
-            <label htmlFor="searchArtist">
+        <SearchMain>
+          <SearchContent>
+            <form onSubmit={ this.searchClick }>
               <input
-                className="search-input"
                 name="searchArtist"
                 type="text"
-                data-testid="search-artist-input"
                 value={ searchArtist }
                 onChange={ this.handleChange }
               />
-            </label>
-            <button
-              // className="button is-primary"
-              name="search"
-              type="submit"
-              data-testid="search-artist-button"
-              disabled={ disable }
-            >
-              Entrar
-            </button>
-          </form>
-        </div>
-        {
-          load && <Loading />
-        }
-        {
-          showResults && (
-            (searchResults.length === 0) ? (<p>Nenhum álbum foi encontrado</p>)
-              : (
-                <div>
-                  <p>
-                    Resultado de álbuns de:
-                    {' '}
-                    { artista }
-                  </p>
-                  <div className="todos-albuns">
+              <button
+                name="search"
+                type="submit"
+                data-testid="search-artist-button"
+                disabled={ disable }
+              >
+                Entrar
+              </button>
+            </form>
+          </SearchContent>
+          {
+            showResults && (
+              (searchResults.length === 0) ? (<p>Nenhum álbum foi encontrado</p>)
+                : (
+                  <SearchContentResults>
                     {searchResults.map((ai) => ( // ai = albumInfo
-                      <div key={ ai.collectionId } className="cada-album">
+                      <div key={ ai.collectionId }>
                         <img src={ ai.artworkUrl100 } alt={ ai.collectionName } />
                         <p>{ ai.collectionName }</p>
-                        <p>{ ai.artistName }</p>
-                        <Link
-                          to={ `/album/${ai.collectionId}` }
-                          data-testid={ `link-to-album-${ai.collectionId}` }
-                        >
+                        {/* <p>{ ai.artistName }</p> */}
+                        <LinkStyled to={ `/album/${ai.collectionId}` }>
                           Search
-                        </Link>
+                        </LinkStyled>
                       </div>
                     ))}
-                  </div>
-                </div>
-              )
-          )
-        }
-      </div>
+                  </SearchContentResults>
+                )
+            )
+          }
+        </SearchMain>
+      </>
     );
   }
 }

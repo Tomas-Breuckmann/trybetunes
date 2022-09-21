@@ -21,5 +21,7 @@ export const StyledLink = styled(Link)`
     color: ${(props) => props.theme.header.color};
     padding: 8px 12px;
     border-radius: 4px;
+    border: 1px solid;
     background: ${(props) => props.theme.button.background};
+    border-color: ${(props) => props.theme.button.border};
 `;

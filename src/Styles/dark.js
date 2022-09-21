@@ -18,4 +18,10 @@ export default {
     background: 'var(--g11)',
     color: 'var(--g3)',
   },
+  search: {
+    background: 'var(--g12)',
+    color: 'var(--g3)',
+    cardBackground: 'var(--g11)',
+    cardBorder: 'var(--g10)',
+  },
 };
